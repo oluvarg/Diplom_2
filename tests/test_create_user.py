@@ -5,13 +5,14 @@ import requests
 from data.handlers import Handlers
 from data.urls import Urls
 from data.user_data import User
+from helpers import Helper
 
 
 class TestCreateUser:
 
     @allure.title('Создание уникального пользователя')
     def test_create_new_user_success(self):
-        response = requests.post(f'{Urls.MAIN_URL}{Handlers.CREATE_USER}', data=User.create_data_user())
+        response = requests.post(f'{Urls.MAIN_URL}{Handlers.CREATE_USER}', data=Helper.create_data_user())
         assert response.status_code == 200 and response.json()["success"] is True
 
     @allure.title('Создание пользователя, который уже зарегистрирован')
